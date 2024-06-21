@@ -1,7 +1,125 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paint Waste Management</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+            color: #333;
+        }
+        header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+        }
+        main {
+            padding: 20px;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .graph {
+            margin: 20px 0;
+        }
+        .location-search {
+            margin: 20px 0;
+        }
+        footer {
+            text-align: center;
+            padding: 10px 0;
+            background-color: #4CAF50;
+            color: white;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
 <body>
-<h1>Hello World</h1>
-<p>I'm hosted with GitHub Pages.</p>
+    <header>
+        <h1>Paint Waste Management</h1>
+    </header>
+    <main>
+        <div class="container">
+            <section class="info">
+                <h2>Understanding Paint Waste</h2>
+                <p>Paint waste is a significant environmental issue. Improper disposal of leftover paint can lead to soil and water contamination. It is essential to manage paint waste responsibly to minimize its impact on the environment.</p>
+            </section>
+            <section class="graphs">
+                <h2>Paint Waste Statistics</h2>
+                <div class="graph">
+                    <canvas id="paintWasteChart"></canvas>
+                </div>
+            </section>
+            <section class="location-search">
+                <h2>Find Donation Centers Near You</h2>
+                <input type="text" id="locationInput" placeholder="Enter your location">
+                <button onclick="findDonationCenters()">Search</button>
+                <ul id="resultsList"></ul>
+            </section>
+        </div>
+    </main>
+    <footer>
+        <p>&copy; 2024 Paint Waste Management</p>
+    </footer>
+    <script>
+        // Chart.js configuration
+        const ctx = document.getElementById('paintWasteChart').getContext('2d');
+        const paintWasteChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['2019', '2020', '2021', '2022', '2023'],
+                datasets: [{
+                    label: 'Paint Waste (tons)',
+                    data: [500, 700, 600, 800, 750],
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        // Mock function to find donation centers
+        function findDonationCenters() {
+            const location = document.getElementById('locationInput').value;
+            const resultsList = document.getElementById('resultsList');
+            resultsList.innerHTML = '';
+
+            if(location) {
+                const mockResults = [
+                    'Paint Donation Center 1 - 123 Main St',
+                    'Paint Donation Center 2 - 456 Elm St',
+                    'Paint Donation Center 3 - 789 Oak St'
+                ];
+
+                mockResults.forEach(result => {
+                    const listItem = document.createElement('li');
+                    listItem.textContent = result;
+                    resultsList.appendChild(listItem);
+                });
+            } else {
+                alert('Please enter a location');
+            }
+        }
+    </script>
 </body>
 </html>
